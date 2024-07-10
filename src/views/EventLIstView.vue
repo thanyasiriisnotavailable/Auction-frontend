@@ -5,13 +5,13 @@ import type { Event } from '@/type'
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 
-const events = ref<Event[]> (null)
+const events = ref<Event[]>(null)
 
 onMounted(() => {
   axios
     .get('https://my-json-server.typicode.com/thanyasiriisnotavailable/331-intro-to-vite/events')
     .then((response) => {
-      console.log(response.data)
+      events.value = response.data
     })
     .catch((error) => {
       console.error('There was an error!', error)
