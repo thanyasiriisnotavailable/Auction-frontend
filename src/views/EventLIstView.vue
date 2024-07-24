@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import EventCard from '@/components/EventCard.vue'
-import type { Event } from '@/type'
+import type { Event } from '@/types'
 import { ref, onMounted, computed } from 'vue'
 import EventService from '@/services/EventService'
 
-const events = ref<Event[]>(null)
+const events = ref<Event[] | null>(null)
 const props = defineProps({
   page: {
     type: Number,
@@ -36,9 +36,7 @@ onMounted(() => {
     >Prev Page</RouterLink
   >
 
-  <RouterLink 
-    :to="{ name: 'event-list-view', query: { page: page + 1 } }"
-    rel="next"
+  <RouterLink :to="{ name: 'event-list-view', query: { page: page + 1 } }" rel="next"
     >Next Page</RouterLink
   >
 </template>
