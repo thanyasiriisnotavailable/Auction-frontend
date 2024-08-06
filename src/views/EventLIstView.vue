@@ -18,7 +18,6 @@ const hasNextPage = computed(() => {
 
 onMounted(() => {
   watchEffect(() => {
-    events.value = null
     EventService.getEvents(perPage.value, page.value)
       .then((response) => {
         events.value = response.data
