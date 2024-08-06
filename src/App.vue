@@ -9,9 +9,6 @@ const { message } = storeToRefs(store)
 <template>
   <div id="layout">
     <header>
-      <div id="flashMessage" v-if="message">
-        <h4>{{ message }}</h4>
-      </div>
       <div class="wrapper">
         <nav>
           <RouterLink :to="{ name: 'event-list-view', query: { perPage: 2, page: 1 } }">Event</RouterLink> |
@@ -48,18 +45,5 @@ nav a.router-link-exact-active {
 h2 {
   font-size: 20px;
   margin-top: 0;
-}
-
-@keyframes yellofade {
-  from {
-    background-color: yellow;
-  }
-  to {
-    background-color: transparent;
-  }
-}
-
-#flashMessage {
-  animation: yellofade 3s ease-in-out;
 }
 </style>
