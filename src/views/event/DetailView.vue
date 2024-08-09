@@ -13,7 +13,7 @@ const props = defineProps<{
 const { event } = toRefs(props)
 </script>
 <template>
-  <div id="flashMessage" v-if="message">
+  <div id="flashMessage" class="animate-fade" v-if="message">
     <h4>{{ message }}</h4>
   </div>
   <p>{{ event.time }} on {{ event.date }} @ {{ event.location }}</p>
@@ -21,7 +21,7 @@ const { event } = toRefs(props)
 </template>
 
 <style>
-@keyframes yellofade {
+/* @keyframes yellofade {
   from {
     background-color: yellow;
   }
@@ -32,5 +32,5 @@ const { event } = toRefs(props)
 
 #flashMessage {
   animation: yellofade 3s ease-in-out;
-}
+} */
 </style>
