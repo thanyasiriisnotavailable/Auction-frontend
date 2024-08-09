@@ -558,12 +558,28 @@ video {
   margin-bottom: 1.5rem;
 }
 
+.mb-\[\] {
+  margin-bottom: ;
+}
+
+.mb-\[1\] {
+  margin-bottom: 1;
+}
+
+.mb-\[180px\] {
+  margin-bottom: 180px;
+}
+
+.mb-\[18px\] {
+  margin-bottom: 18px;
+}
+
 .flex {
   display: flex;
 }
 
-.w-64 {
-  width: 16rem;
+.w-\[250px\] {
+  width: 250px;
 }
 
 .transform {
@@ -591,8 +607,8 @@ video {
   border-color: rgb(75 85 99 / var(--tw-border-opacity));
 }
 
-.p-4 {
-  padding: 1rem;
+.p-\[20px\] {
+  padding: 20px;
 }
 
 .text-center {
