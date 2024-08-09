@@ -586,3 +586,9 @@ video {
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity));
 }
+
+.hover\:shadow-sp:hover {
+  --tw-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.2);
+  --tw-shadow-colored: 0 3px 12px 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
