@@ -6,9 +6,9 @@ import { RouterLink, RouterView } from 'vue-router'
   <div class="text-center font-sans text-gray-700 antialias">
     <header>
       <div class="wrapper">
-        <nav>
-          <RouterLink :to="{ name: 'event-list-view', query: { perPage: 2, page: 1 } }">Event</RouterLink> |
-          <RouterLink :to="{ name: 'about' }">About</RouterLink>
+        <nav class="py-6">
+          <RouterLink class="font-bold text-gray-700" exact-active-class="text-green-500" :to="{ name: 'event-list-view', query: { perPage: 2, page: 1 } }">Event</RouterLink> |
+          <RouterLink class="font-bold text-gray-700" exact-active-class="text-green-500" :to="{ name: 'about' }">About</RouterLink>
         </nav>
       </div>
     </header>
