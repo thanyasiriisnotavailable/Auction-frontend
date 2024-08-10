@@ -12,6 +12,7 @@ import { RouterLink, RouterView } from 'vue-router'
         </nav>
       </div>
     </header>
+    <h1>Deploy with Vercel</h1>
     <RouterView />
   </div>
 </template>
