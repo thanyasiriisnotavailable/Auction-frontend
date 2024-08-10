@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
+  <SpeedInsights />
   <div class="text-center font-sans text-gray-700 antialias">
     <header>
       <div class="wrapper">
