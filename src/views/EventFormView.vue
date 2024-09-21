@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import type { Event } from '@/types'
-import { ref } from 'vue'
+import type { Event, Organizer } from '@/types'
+import { onMounted, ref } from 'vue'
 import EventService from '@/services/EventService'
+import OrganizerService from '@/services/OrganizerService'
 import { useRouter } from 'vue-router'
 import { useMessageStore } from '@/stores/message'
 import BaseInput from '@/components/BaseInput.vue'
@@ -36,6 +37,17 @@ function saveEvent() {
       router.push({ name: 'network-error-view' })
     })
 }
+
+const organizers = ref<Organizer[]>([])
+onMounted(() => {
+  OrganizerService.getOrganizers()
+    .then((response) => {
+      organizers.value = response.data
+    })
+    .catch(() =>  {
+      router.push({ name: 'network-error-view'})
+    })
+})
 </script>
 
 <template>
@@ -65,6 +77,21 @@ function saveEvent() {
           </div>
         </div>
 
+        <div class="form-section">
+          <h3>Who is your organizer?</h3>
+          <div class="form-group">
+            <label>Select an organizer</label>
+            <select v-model="event.organizer.id">
+              <option 
+                v-for="option in organizers"
+                :value="option.id"
+                :key="option.id"
+                :selected="option.id === event.organizer.id"
+              > {{ option.name }}
+              </option>
+            </select>
+          </div>
+        </div>
         <button class="submit-btn" type="submit">Submit</button>
       </form>
     </div>
