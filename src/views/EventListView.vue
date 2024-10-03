@@ -4,6 +4,7 @@ import type { Event } from '@/types'
 import { ref, onMounted, computed, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import EventService from '@/services/EventService'
+import BaseInput from '@/components/BaseInput.vue'
 
 const route = useRoute()
 
@@ -28,11 +29,19 @@ onMounted(() => {
       })
   })
 })
+
+const keyword = ref('')
 </script>
 
 <template>
   <h1>Events For Good</h1>
   <div class="flex flex-col items-center">
+    <div class="w-64">
+      <BaseInput
+        v-model="keyword"
+        label="Search..."
+        class="w-full"/>
+    </div>
     <EventCard v-for="event in events" :key="event.id" :event="event" />
     <div class="flex w-72">
       <RouterLink
