@@ -4,6 +4,8 @@ import type { Event } from '@/types'
 import { ref, onMounted, computed, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import EventService from '@/services/EventService'
+import BaseInput from '@/components/BaseInput.vue'
+import router from '@/router'
 
 const route = useRoute()
 
@@ -18,21 +20,40 @@ const hasNextPage = computed(() => {
 
 onMounted(() => {
   watchEffect(() => {
-    EventService.getEvents(perPage.value, page.value)
-      .then((response) => {
-        events.value = response.data
-        totalEvents.value = parseInt(response.headers['x-total-count'])
-      })
-      .catch((error) => {
-        console.error('There was an error!', error)
-      })
+    updateKeyword
   })
 })
+
+const keyword = ref('')
+function updateKeyword (value: string) {
+  let queryFunction;
+  if (keyword.value === '') {
+    queryFunction = EventService.getEvents(3, page.value)
+  } else {
+    queryFunction = EventService.getEventsByKeyword(keyword.value, 3, page.value)
+  }
+  queryFunction.then((response) => {
+    events.value = response.data
+    console.log('events', events.value)
+    totalEvents.value = response.headers['x-total-count']
+    console.log('totalEvent',totalEvents.value)
+  }).catch(() => {
+    router.push({ name: 'network-error-view'})
+  })
+}
 </script>
 
 <template>
   <h1>Events For Good</h1>
   <div class="flex flex-col items-center">
+    <div class="w-64">
+      <BaseInput
+        v-model="keyword"
+        type="text"
+        label="Search..."
+        @input="updateKeyword"
+        />
+    </div>
     <EventCard v-for="event in events" :key="event.id" :event="event" />
     <div class="flex w-72">
       <RouterLink

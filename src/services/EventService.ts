@@ -1,5 +1,6 @@
-import axios from 'axios'
+import axios, { Axios, type AxiosResponse } from 'axios'
 import type { Event, Organizer } from '@/types'
+
 
 const apiClient = axios.create({
   baseURL: import.meta.env.VITE_BACKEND_URL,
@@ -22,5 +23,8 @@ export default {
   },
   saveOrganizer(organizer: Organizer) {
     return apiClient.post('/organizers', organizer)
+  },
+  getEventsByKeyword(keyword: string, perPage: number, page: number) : Promise<AxiosResponse<Event[]>> {
+    return apiClient.get<Event[]>('/events?title=' + keyword + '&_limit=' + perPage + '&_page=' + page)
   }
 }
