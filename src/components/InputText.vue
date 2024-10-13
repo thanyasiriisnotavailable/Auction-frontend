@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import UniqueID from '@/features/UniqueId'
+import UniqueID from '@/features/UniqueID'
 import ErrorMessage from '@/components/ErrorMessage.vue'
 import { computed } from 'vue'
 const modelValue = defineModel()
