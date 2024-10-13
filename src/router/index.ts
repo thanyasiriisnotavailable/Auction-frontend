@@ -12,6 +12,7 @@ import EventService from '@/services/EventService'
 import { useEventStore } from '@/stores/event'
 import AddEventView from '@/views/EventFormView.vue'
 import AddOrganizerView from '@/views/OrganizerFormView.vue'
+import LoginView from '@/views/LoginView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -98,6 +99,11 @@ const router = createRouter({
       path: '/network-error',
       name: 'network-error-view',
       component: NetworkErrorView
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: LoginView
     }
   ],
   scrollBehavior(to, from, savedPosition) {
