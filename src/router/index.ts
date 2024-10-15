@@ -1,16 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import EventListView from '@/views/EventListView.vue'
+import AuctionItemListView from '@/views/AuctionItemListView.vue'
 import AboutView from '@/views/AboutView.vue'
-import EventDetailView from '@/views/event/DetailView.vue'
-import EventRegisterView from '@/views/event/RegisterView.vue'
-import EventEditView from '@/views/event/EditView.vue'
-import EventLayoutView from '@/views/event/LayoutView.vue'
+import AuctionItemDetailView from '@/views/event/DetailView.vue'
+import AuctionItemRegisterView from '@/views/event/RegisterView.vue'
+import AuctionItemEditView from '@/views/event/EditView.vue'
+import AuctionItemLayoutView from '@/views/event/LayoutView.vue'
 import NotFoundView from '@/views/NotFoundView.vue'
 import NetworkErrorView from '@/views/NetworkErrorView.vue'
 import nProgress from 'nprogress'
-import EventService from '@/services/EventService'
-import { useEventStore } from '@/stores/event'
-import AddEventView from '@/views/EventFormView.vue'
+import AuctionItemService from '@/services/AuctionItemService'
+import { useAuctionItemStore } from '@/stores/auctionItem'
 import AddOrganizerView from '@/views/OrganizerFormView.vue'
 import LoginView from '@/views/LoginView.vue'
 
@@ -19,28 +18,28 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'event-list-view',
-      component: EventListView,
+      name: 'auction-item-list-view',
+      component: AuctionItemListView,
       props: (route) => ({ page: parseInt(route.query.page?.toString() || '1') })
     },
     {
-      path: '/event/:id',
-      name: 'event-layout-view',
-      component: EventLayoutView,
+      path: '/auction-item/:id',
+      name: 'auction-item-layout-view',
+      component: AuctionItemLayoutView,
       props: true,
       beforeEnter: (to) => {
         const id = parseInt(to.params.id as string)
-        const eventStore = useEventStore()
-        return EventService.getEvent(id)
+        const auctionItemStore = useAuctionItemStore()
+        return AuctionItemService.getAuctionItem(id)
           .then((response) => {
-            // need to setup the data for the event
-            eventStore.setEvent(response.data)
+            // Set up the data for the auction item
+            auctionItemStore.setAuctionItem(response.data)
           })
           .catch((error) => {
             if (error.response && error.response.status === 404) {
               return {
                 name: '404-resource-view',
-                params: { resource: 'event' }
+                params: { resource: 'auction item' }
               }
             } else {
               return { name: 'network-error-view' }
@@ -50,20 +49,20 @@ const router = createRouter({
       children: [
         {
           path: '',
-          name: 'event-detail-view',
-          component: EventDetailView,
+          name: 'auction-item-detail-view',
+          component: AuctionItemDetailView,
           props: true
         },
         {
           path: 'register',
-          name: 'event-register-view',
-          component: EventRegisterView,
+          name: 'auction-item-register-view',
+          component: AuctionItemRegisterView,
           props: true
         },
         {
           path: 'edit',
-          name: 'event-edit-view',
-          component: EventEditView,
+          name: 'auction-item-edit-view',
+          component: AuctionItemEditView,
           props: true
         }
       ]
@@ -73,11 +72,6 @@ const router = createRouter({
       path: '/about',
       name: 'about',
       component: AboutView
-    },
-    {
-      path: '/add-event',
-      name: 'add-event',
-      component: AddEventView
     },
     {
       path: '/add-organizer',
@@ -114,9 +108,11 @@ const router = createRouter({
     }
   }
 })
+
 router.beforeEach(() => {
   nProgress.start()
 })
+
 router.afterEach(() => {
   nProgress.done()
 })

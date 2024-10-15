@@ -1,25 +1,17 @@
-export interface Event {
-  id: number
-  category: string
-  title: string
-  description: string
-  location: string
-  date: string
-  time: string
-  petsAllowed: boolean
-  organizer: Organizer
-  images: string[]
+export interface AuctionItem {
+  id: number;
+  description: string;
+  type: string;
+  bidHistory: Bid[];
+  successfulBid: Bid | null;
 }
 
-export interface Organizer {
-  id: number
-  name: string
+export interface Bid {
+  id: number;
+  amount: number;
+  datetime: string;
 }
 
-export interface MessageState {
-  message: string
-}
-
-export interface EventState {
-  event: Event | null
+export interface AuctionItemState {
+  auctionItem: AuctionItem | null;
 }

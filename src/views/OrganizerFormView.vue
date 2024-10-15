@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Organizer } from '@/types'
 import { ref } from 'vue'
-import EventService from '@/services/EventService'
+import EventService from '@/services/AuctionItemService'
 import { useRouter } from 'vue-router'
 import { useMessageStore } from '@/stores/message'
 import { storeToRefs } from 'pinia'

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Event, Organizer } from '@/types'
 import { onMounted, ref } from 'vue'
-import EventService from '@/services/EventService'
+import EventService from '@/services/AuctionItemService'
 import OrganizerService from '@/services/OrganizerService'
 import { useRouter } from 'vue-router'
 import { useMessageStore } from '@/stores/message'

@@ -1,41 +1,32 @@
 <script setup lang="ts">
 import { toRefs, defineProps } from 'vue'
-import type { Event } from '@/types'
+import type { AuctionItem } from '@/types'
 import { useMessageStore } from '@/stores/message'
 import { storeToRefs } from 'pinia'
+
 const store = useMessageStore()
 const { message } = storeToRefs(store)
 
 const props = defineProps<{
-  event: Event
-  id: String
+  auctionItem: AuctionItem
+  id: string
 }>()
-const { event } = toRefs(props)
+
+const { auctionItem } = toRefs(props)
 </script>
 <template>
   <div id="flashMessage" class="animate-fade" v-if="message">
     <h4>{{ message }}</h4>
   </div>
-  <p>{{ event.title }} @ {{ event.location }}</p>
-  <p>{{ event.description }}</p>
+  <p>{{ auctionItem.description }} (Type: {{ auctionItem.type }})</p>
+  <div v-if="auctionItem.successfulBid">
+    <p>Successful Bid: ${{ auctionItem.successfulBid.amount }} at {{ auctionItem.successfulBid.datetime }}</p>
+  </div>
+  <div v-else>
+    <p>No successful bid yet.</p>
+  </div>
+  <p>Total Bids: {{ auctionItem.bidHistory.length }}</p>
   <div class="flex flex-row flex-wrap justify-center">
-    <img v-for="image in event.images" :key="image" :src="image" alt="events image"
-      class="border-solid border-gray-200 border-2 rounded p-1 m-1 w-40
-      hover:show-lg" />
+    <!-- You could add images or other content related to auctionItem if needed -->
   </div>
 </template>
-
-<!-- <style>
-@keyframes yellofade {
-  from {
-    background-color: yellow;
-  }
-  to {
-    background-color: transparent;
-  }
-}
-
-#flashMessage {
-  animation: yellofade 3s ease-in-out;
-}
-</style> -->
